@@ -4,6 +4,10 @@
 const express = require('express');
 const morgan = require('morgan');
 const Sequelize = require('sequelize');
+
+// enable CORS
+const cors = require('cors');
+
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 // create the Express app
@@ -18,13 +22,15 @@ const sequelize = new Sequelize({
 app.use(morgan('dev'));
 // setup request body json parsing
 app.use(express.json());
+// setup CORS
+app.use(cors());
+app.options('*', cors());
 
 
 // setup your api routes here
 app.use("/api/users", require("./routes/users"));
 app.use("/api/courses", require("./routes/courses"));
 app.use("/api/index", require("./routes/index"));
-app.use("/api/authentication", require("./routes/authentication"));
 
 
 
