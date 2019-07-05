@@ -22,7 +22,7 @@ class UserSignIn extends Component {
             <div className="bounds">
                 <div className="grid-33 centered signin">
                     <h1>Sign In</h1>
-                    <div>}
+                    <div>
                         <form onSubmit={e => this.props.signIn(e, this.state.emailAddress, this.state.password)}>
                             <div>
                                 {/* email address input */}
@@ -43,7 +43,7 @@ class UserSignIn extends Component {
                     {/*Reroute to home, conditionally */}
                     {this.props.isAuthenticated === true && (this.props.history.goBack())}
                     <p>&nbsp;</p>
-                    <p>Don't have a user account?<Link to="/signup">Click here</Link> to sign up!</p>
+                    <p>Don't have a user account?<Link to="/signup"> Click here</Link> to sign up!</p>
                 </div>
             </div>
         );
