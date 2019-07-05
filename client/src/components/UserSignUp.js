@@ -23,17 +23,36 @@ class UserSignUp extends Component {
 
         const { firstName, lastName, emailAddress, password, confirmPassword } = this.state;
 
-        if (password === '') {
+        // if first name is blank, show error
+        if (firstName === '') {
+            this.setState({
+                errorMessage: 'Enter your first name'
+            })
+          // if last name is blank, show error
+        } else if (lastName === '') {
+            this.setState({
+                errorMessage: 'Enter your last name'
+            })
+        // if email is blank, show error
+        } else if (emailAddress === '') {
+            this.setState({
+                errorMessage: 'An email address is required'
+            })
+        // if password is blank, show error
+        } else if (password === '') {
             this.setState({
                 errorMessage: 'A password is required'
             })
+         // if password inputs dont match, show error
         } else if (password !== confirmPassword) {
             this.setState({
                 errorMessage: 'The passwords do not match'
             })
         } else {
+            // if everything is entered correctly, make request
             axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, password })
                 .then(res => {
+                    // if response is successful
                     if (res.status === 201) {
                         this.setState({
                             errorMessage: ''
@@ -57,10 +76,10 @@ class UserSignUp extends Component {
                     <div>
                         {errorMessage ? (
                             <div>
-                                <h2 className='validation--errors--label'>Errors</h2>
+                                <h2 className='validation--errors--label'>Uh oh!</h2>
                                 <div className='validation-errors'>
                                     <ul>
-                                        <li>{errorMessage}}</li>
+                                        <li>{errorMessage}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -118,8 +137,8 @@ class UserSignUp extends Component {
                                 />
                             </div>
                             <div className='grid-100 pad-bottom'>
-                                <button className='button'type='submit'>Sign Up</button>
-                                <button className='button button-secondary' to='#'onClick={this.handleCancel}>Cancel</button>
+                                <button className='button' type='submit'>Sign Up</button>            
+                                <button className='button button-secondary' to='#' onClick={this.handleCancel}>Cancel</button>
                             </div>
                         </form>
                     </div>
