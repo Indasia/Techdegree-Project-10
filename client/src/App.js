@@ -6,7 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 import axios from 'axios';
-
+import './styles/global.css';
 
 // import components
 import Courses from './components/Courses';
