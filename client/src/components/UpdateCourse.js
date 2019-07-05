@@ -96,7 +96,8 @@ class UpdateCourse extends Component {
                             </div>
                         </div>
                     ) : ''}
-                    <form onSubmit={e => this.handleCreateCourse(e, localStorage.getItem('username'), localStorage.getItem('password'), title, description, materialsNeeded, estimatedTime)}> {/* should this be create course?*/ */}
+                    {/* should this be create course?*/}
+                    <form onSubmit={e => this.handleCreateCourse(e, localStorage.getItem('username'), localStorage.getItem('password'), title, description, materialsNeeded, estimatedTime)}>
                         <div className='grid-66'>
                             <div className='course--header'>
                                 <h4 className='course--label'>Course</h4>
