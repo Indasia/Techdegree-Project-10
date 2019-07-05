@@ -1,18 +1,23 @@
 // import React
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from 'react-router-dom';
 import axios from 'axios';
+import "./css/global.css";
 
 
 // import components
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-// import UserSignIn from './components/UserSignIn';
-// import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import UserSignUp from './components/UserSignUp';
 import CreateCourse from './components/CreateCourse';
-// import UpdateCourse from './components/UpdateCourse';
-// import Header from './components/Header';
-// import UserSignOut from './components/UserSignOut';
+import UpdateCourse from './components/UpdateCourse';
+import Header from './components/Header';
+import UserSignOut from './components/UserSignOut';
 
 
 class App extends Component {
@@ -55,13 +60,13 @@ class App extends Component {
         <div>
           <Header />
           <Switch>
-            <Route exact path='/' component={Courses} />
+            <Route exact path='/courses' render={() => <Courses />} />
             <PrivateRoute path='/courses/create' component={CreateCourse} />
-            <Route exact path='courses/:id' component={CourseDetail} />
+            <Route exact path='courses/:id' render={() => <CourseDetail />} />
+            <Route exact path='/UserSignIn' render={ () => <UserSignIn />} />
             <PrivateRoute path='/courses/:id/update' component={UpdateCourse} />
-            <Route exact path='/UserSignUp' component={UserSignUp} />
-            <Route exact path='/UserSignIn' component={() => <UserSignIn handleSignIn={this.handleSignIn} />} />
-            <Route exact path='/UserSignOut' component={UserSignOut} />
+            <Route exact path='/UserSignUp' component={UserSignUp} />    
+            <Route exact path='/UserSignOut' component={UserSignOut} />     
           </Switch>   
         </div>
       </BrowserRouter>
