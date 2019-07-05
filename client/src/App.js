@@ -6,7 +6,6 @@ import {
   Switch
 } from 'react-router-dom';
 import axios from 'axios';
-import "./css/global.css";
 
 
 // import components
@@ -18,6 +17,7 @@ import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import Header from './components/Header';
 import UserSignOut from './components/UserSignOut';
+import PrivateRoute from './components/PrivateRoute';
 
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {};
-    this.signIn = this.signIn.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
    
   // handle sign in
