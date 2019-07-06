@@ -8,7 +8,7 @@ const Header = () => {
                 <h1 className='header--logo'>Courses</h1>
                 <nav>
                     <span>Welcome {localStorage.getItem('firstName')} {localStorage.getItem('lastName')}</span>
-                    <Link className='signout' to='/signout'> Sign Out </Link>
+                    <Link className='signout' to='/usersignout'> Sign Out </Link>
                 </nav>
             </div>
         </div>
