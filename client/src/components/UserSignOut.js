@@ -1,3 +1,12 @@
+const UserSignOut = () => {
+    localStorage.clear();
+    window.location.href = '/';
+    return null;
+}
+
+export default UserSignOut;
+
+/*
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
@@ -10,5 +19,4 @@ class UserSignOut extends Component {
         )
     }
 }
-
-export default UserSignOut;
+*/
