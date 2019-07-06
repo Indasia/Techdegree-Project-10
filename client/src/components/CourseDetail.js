@@ -9,7 +9,8 @@ class CourseDetail extends Component {
         course: {},
         courseId: '',
         createdBy: '',
-        errorMessage: ''
+        errorMessage: '',
+        isLoading: true
     };
 
     // when component mounts, get course details
@@ -25,11 +26,13 @@ class CourseDetail extends Component {
             .then(res => {
                 // grab desired course data
                 const courseInfo = res.data;
+                console.log(courseInfo);
                 // set state to current course
                 this.setState({
                     courseInfo,
-                    courseId: courseInfo.id,
-                    createdBy: courseInfo.User.id
+                    courseId: courseInfo.course.id,
+                    createdBy: courseInfo.course.userId,
+                    isLoading: false
                 });
             }).catch(error => {
                 // catch errors and show error in console
@@ -73,9 +76,13 @@ class CourseDetail extends Component {
     }
 
 
-        render() {
+    render() {
+            if (this.state.isLoading) {
+                return <h1> Loading </h1>
+        }
+        console.log(this.state.courseInfo);
             const { createdBy } = this.state;
-            const { id, title, materialsNeeded, estimatedTime, description } = this.state.course;
+            const { id, title, materialsNeeded, estimatedTime, description, User } = this.state.courseInfo.course;
             return (
                 <div>
                     <div className='actions--bar'>
@@ -101,7 +108,7 @@ class CourseDetail extends Component {
                             <div className='course--header'>
                                 <h4 className='course-label'>Course</h4>
                                 <h3 className='course--title'>{title}</h3>
-                                <p>By {localStorage.getItem('name')}</p>
+                                <p>By {User.firstName} {User.lastName}</p>
                             </div>
                         </div>
                     </div>
@@ -109,7 +116,7 @@ class CourseDetail extends Component {
                     {/* course description*/}
                     <div className='course--description'>
                         {/* use <ReactMarkdown> to render the course description property */}
-                        <ReactMarkdown soure={description} />
+                        <ReactMarkdown source={description} />
                     </div>
 
                     {/* side bar */}
