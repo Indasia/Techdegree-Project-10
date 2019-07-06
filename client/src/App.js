@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import axios from 'axios';
 import './styles/global.css';
@@ -60,12 +61,13 @@ class App extends Component {
         <div>
           <Header />
           <Switch>
+            <Redirect exact from='/' to='/courses' />
             <Route exact path='/courses' render={() => <Courses />} />
             <PrivateRoute path='/courses/create' component={CreateCourse} />
-            <Route exact path='courses/:id' render={() => <CourseDetail />} />
-            <Route exact path='/UserSignIn' render={ () => <UserSignIn />} />
+            <Route exact path='/courses/:id' component={CourseDetail} />
+            <Route exact path='/UserSignIn' render={() => <UserSignIn signIn={this.handleSignIn}/>} />
             <PrivateRoute path='/courses/:id/update' component={UpdateCourse} />
-            <Route exact path='/UserSignUp' component={UserSignUp} />    
+            <Route exact path='/UserSignUp' render={() => <UserSignUp signIn={this.handleSignIn}/> } />    
             <Route exact path='/UserSignOut' component={UserSignOut} />     
           </Switch>   
         </div>
