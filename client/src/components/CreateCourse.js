@@ -35,7 +35,7 @@ class CreateCourse extends Component {
                 method: 'post',
                 url: 'http://localhost:5000/api/courses',
                 auth: {
-                    username: localStorage.getItem('userename'),
+                    username: localStorage.getItem('username'),
                     password: localStorage.getItem('password')
                 },
                 data: {
@@ -47,6 +47,9 @@ class CreateCourse extends Component {
             }).then(alert("New course successfully created"))
                 .then(() => {
                     this.props.history.push('/');
+                }).catch(error => {
+                    console.log('Oops!', error);
+                    console.log(error.response.data);
                 })
                 
         }
