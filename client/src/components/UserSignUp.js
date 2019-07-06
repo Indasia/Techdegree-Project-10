@@ -57,10 +57,11 @@ class UserSignUp extends Component {
                         this.setState({
                             errorMessage: ''
                         })
-                        this.props.signIn(null, emailAddress, password);
+                        this.props.signIn({ emailAddress, password });
                     }
                 }).catch(error => {
                     console.log('Oops!', error);
+                    console.log(error.response.data);
                 });
         }
     }
@@ -85,7 +86,7 @@ class UserSignUp extends Component {
                             </div>
                         ) : ''}
 
-                        <form onSubmit={e => this.handleSignUp(e, firstName, lastName, emailAddress, password)}>
+                        <form onSubmit={(e) => this.handleSignUp(e, firstName, lastName, emailAddress, password)}>
                             <div>
                                 <input
                                     id='firstName'
@@ -137,8 +138,9 @@ class UserSignUp extends Component {
                                 />
                             </div>
                             <div className='grid-100 pad-bottom'>
-                                <button className='button' type='submit'>Sign Up</button>            
-                                <button className='button button-secondary' to='#' onClick={this.handleCancel}>Cancel</button>
+                                <button className='button' type='submit'>Sign Up</button>     
+                                
+                                <Link className="button button-secondary" to="/courses" >Cancel</Link>
                             </div>
                         </form>
                     </div>
