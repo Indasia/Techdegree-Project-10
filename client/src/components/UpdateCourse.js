@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 class UpdateCourse extends Component {
@@ -16,13 +17,13 @@ class UpdateCourse extends Component {
 
     // when update course component mounts, get course info
     componentDidMount() {
-        this.handleCourses();
+        // this.handleCourses();
     }
 
     // handle changes to user input
     handleCourses = e => {
         // request info
-        axios.get('http://localhost:5000/api/courses' + this.props.match.params.id)
+        axios.get('http://localhost:5000/api/courses/' + this.props.match.params.id)
             // when info come backs
             .then(res => {
 
@@ -59,14 +60,14 @@ class UpdateCourse extends Component {
         } else {
             axios({
                 method: 'put',
-                url: 'http://localhost:5000/api/course' + this.props.match.paramslid,
+                url: 'http://localhost:5000/api/courses/' + this.props.match.params.id,
                 auth: {
-                    username: localStorage.getItem('username'),
-                    password: localStorage.getItem('password')
+                    username: localStorage.getItem("Email"),
+                    password: localStorage.getItem('Password')
                 },
                 data: {
-                    userId: this.state.userId,
-                    id: this.state.id,
+                    userId: localStorage.getItem("UserId"),
+                    id: this.props.match.params.id,
                     title: this.state.title,
                     description: this.state.description,
                     estimatedTime: this.state.estimatedTime,
@@ -97,7 +98,7 @@ class UpdateCourse extends Component {
                         </div>
                     ) : ''}
                     {/* should this be create course?*/}
-                    <form onSubmit={e => this.handleCreateCourse(e, localStorage.getItem('username'), localStorage.getItem('password'), title, description, materialsNeeded, estimatedTime)}>
+                    <form onSubmit={e => this.handleSubmit(e)}>
                         <div className='grid-66'>
                             <div className='course--header'>
                                 <h4 className='course--label'>Course</h4>
@@ -108,8 +109,8 @@ class UpdateCourse extends Component {
                                         type='text'
                                         className='input-title course--title--input'
                                         placeholder='Course title'
-                                        value={this.course.title}
-                                        onChange={this.handleSubmit}
+                                        value={this.state.title}
+                                        onChange={this.handleInputChange}
                                     />
                                 </div>
                                 <p>By {this.state.username}}</p>
@@ -121,8 +122,8 @@ class UpdateCourse extends Component {
                                         name='description'
                                         className=''
                                         placeholder='Course description'
-                                        value={this.course.description}
-                                        onChange={this.handleSubmit} >
+                                        value={this.state.description}
+                                        onChange={this.handleInputChange}>
                                     </textarea>
                                 </div>
                             </div>
@@ -139,8 +140,8 @@ class UpdateCourse extends Component {
                                                 type='text'
                                                 className='course--time--input'
                                                 placeholder='Hours'
-                                                value={this.course.estimatedTime}
-                                                onChange={this.handleSubmit}
+                                                value={this.state.estimatedTime}
+                                                onChange={this.handleInputChange}
                                             />
                                         </div>
                                     </li>
@@ -152,8 +153,8 @@ class UpdateCourse extends Component {
                                                 name='materialsNeeded'
                                                 className=''
                                                 placeholder='Materials needed'
-                                                value={this.course.materialsNeeded}
-                                                onChange={this.handleSubmit} >
+                                                value={this.state.materialsNeeded}
+                                                onChange={this.handleInputChange} >
                                             </textarea>
                                         </div>
                                     </li>
@@ -165,7 +166,7 @@ class UpdateCourse extends Component {
                             {/* renders an 'Update Course' button that when clicked sends a PUT request to the REST API's /api/courses/:id route.  */}
                             <button className='button' type='submit'> Update Course </button>
                             {/* renders a 'Cancel' button that returns the user to the 'Course Detail' screen. */}
-                            <button className='button button-secondary' to='#' onClick={this.handleCancel.bind(this)}> Cancel </button>
+                            <Link className='button button-secondary' to='/courses'> Cancel </Link>
                         </div>
                     </form>
                 </div>

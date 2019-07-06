@@ -2,12 +2,12 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const Header = () => {
-    return localStorage.getItem('id') ? (
+    return localStorage.getItem('IsLoggedIn') ? (
         <div className='header'>
             <div className='bounds'>
                 <h1 className='header--logo'>Courses</h1>
                 <nav>
-                    <span>Welcome {localStorage.getItem('firstName')} {localStorage.getItem('lastName')}</span>
+                    <span>Welcome {localStorage.getItem('FirstName')} {localStorage.getItem('LastName')}</span>
                     <Link className='signout' to='/usersignout'> Sign Out </Link>
                 </nav>
             </div>

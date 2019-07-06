@@ -47,7 +47,7 @@ class App extends Component {
           window.localStorage.setItem('LastName', res.data.lastName)
           window.localStorage.setItem('Email', userInfo.emailAddress)
           window.localStorage.setItem('Password', userInfo.password)
-          window.localStorage.setItem('UserId', JSON.stringify(res.data._id))
+          window.localStorage.setItem('UserId', JSON.stringify(res.data.id))
           window.localStorage.setItem('IsLoggedIn', JSON.stringify(true))
           window.location.assign('/')
 

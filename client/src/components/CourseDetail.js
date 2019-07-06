@@ -51,8 +51,8 @@ class CourseDetail extends Component {
             method: 'DELETE',
             // set authoriation header
             auth: {
-                username: localStorage.getItem('username'),
-                password: localStorage.getItem('password')
+                username: localStorage.getItem('Email'),
+                password: localStorage.getItem('Password')
             },
             data: {
                 id: this.state.courseId
@@ -89,14 +89,14 @@ class CourseDetail extends Component {
                         <div className='bounds'>
                             <div className='grid-100'>
                                 {/* render update and delete buttons only if user is logged in */}
-                                {(localStorage.getItem('id') !== '') && parseInt(localStorage.getItem('id')) === createdBy ? (
+                                {(localStorage.getItem('IsLoggedIn')) && parseInt(localStorage.getItem('UserId')) === createdBy ? (
                                     <span>
                                         {/* update course */}
                                         <Link className='button' to={'/courses/' + id + '/update'}>Update Course</Link>
                                         {/* delete course */}
-                                        <Link className='button' onClick={e => this.handleDeleteCourse()}>Delete Course</Link>
+                                        <button className='button' onClick={e => this.handleDeleteCourse(e)}>Delete Course</button>
                                     </span>
-                                ) : "" }
+                                ) : ("")}
                                 <Link className='button button-secondary' to='/'>Return to List</Link>
                             </div>
                         </div>
@@ -113,11 +113,11 @@ class CourseDetail extends Component {
                         </div>
                     </div>
 
-                    {/* course description*/}
-                    <div className='course--description'>
-                        {/* use <ReactMarkdown> to render the course description property */}
-                        <ReactMarkdown source={description} />
-                    </div>
+                        {/* course description*/}
+                        <div className='course--description'>
+                        {/* use <ReactMarkdown> to render the course description property */}                           
+                                <ReactMarkdown source={description} />                   
+                        </div>
 
                     {/* side bar */}
                     <div className='grid-25 grid-right'>

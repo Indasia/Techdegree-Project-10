@@ -98,6 +98,7 @@ router.get('/:id', function (req, res, next) {
 router.post('/', authentication, function (req, res, next) {
    
     const info = req.body;
+    console.log(info);
 
     // if title is not entered
     if (!info.title && !info.description) {

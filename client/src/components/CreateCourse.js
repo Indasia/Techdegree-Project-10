@@ -35,14 +35,15 @@ class CreateCourse extends Component {
                 method: 'post',
                 url: 'http://localhost:5000/api/courses',
                 auth: {
-                    username: localStorage.getItem('username'),
-                    password: localStorage.getItem('password')
+                    username: localStorage.getItem('Email'),
+                    password: localStorage.getItem('Password')
                 },
                 data: {
                     title: this.state.title,
                     description: this.state.description,
                     estimatedTime: this.state.estimatedTime,
-                    materialsNeeded: this.state.materialsNeeded
+                    materialsNeeded: this.state.materialsNeeded,
+                    userId: localStorage.getItem("UserId"),
                 }
             }).then(alert("New course successfully created"))
                 .then(() => {
@@ -63,7 +64,7 @@ class CreateCourse extends Component {
                 <div>
                     {errorMessage ? (
                         <div>
-                            <h2 className="validation--errors--label">Validation errors</h2>
+                            <h2 className="validation--errors--label">Uh oh!</h2>
                             <div className="validation-errors">
                                 <ul>
                                     <li>{errorMessage}</li>
