@@ -23,7 +23,10 @@ class UserSignIn extends Component {
                 <div className="grid-33 centered signin">
                     <h1>Sign In</h1>
                     <div>
-                        <form onSubmit={e => this.props.signIn(e, this.state.emailAddress, this.state.password)}>
+                        <form onSubmit={e => {
+                            e.preventDefault();
+                            this.props.signIn({ emailAddress: this.state.emailAddress, password: this.state.password })
+                        }}>
                             <div>
                                 {/* email address input */}
                                 <input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" onChange={this.handleInputChange} />
