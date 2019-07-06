@@ -140,12 +140,12 @@ class UserSignUp extends Component {
                             <div className='grid-100 pad-bottom'>
                                 <button className='button' type='submit'>Sign Up</button>     
                                 
-                                <Link className="button button-secondary" to="/courses" >Cancel</Link>
+                                <Link className="button button-secondary" to="/courses">Cancel</Link>
                             </div>
                         </form>
                     </div>
                     <p>&nbsp;</p>
-                    <p>Already have a user account? <Link to='/signin'>Click here</Link> to sign in!</p>
+                    <p>Already have a user account? <Link to='/usersignin'>Click here</Link> to sign in!</p>
                 </div>
             </div>
 
