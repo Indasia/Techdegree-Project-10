@@ -17,16 +17,20 @@ class UserSignIn extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    handleSubmit = e => {
+        e.preventDefault();
+        let userInfo = { password: this.state.password, emailAddress: this.state.emailAddress }
+        this.props.signIn(userInfo)
+    };
+
+
     render() {
         return (
             <div className="bounds">
                 <div className="grid-33 centered signin">
                     <h1>Sign In</h1>
-                    <div>
-                        <form onSubmit={e => {
-                            e.preventDefault();
-                            this.props.signIn({ emailAddress: this.state.emailAddress, password: this.state.password })
-                        }}>
+                    <div> 
+                        <form onSubmit={this.handleSubmit}>
                             <div>
                                 {/* email address input */}
                                 <input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" onChange={this.handleInputChange} />
@@ -43,10 +47,8 @@ class UserSignIn extends Component {
                             </div>
                         </form>
                     </div>
-                    {/*Reroute to home, conditionally */}
-                    {this.props.isAuthenticated === true && (this.props.history.goBack())}
                     <p>&nbsp;</p>
-                    <p>Don't have a user account?<Link to="/signup"> Click here</Link> to sign up!</p>
+                    <p>Don't have a user account?<Link to="/usersignup"> Click here</Link> to sign up!</p>
                 </div>
             </div>
         );
