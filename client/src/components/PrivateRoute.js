@@ -4,21 +4,22 @@ import {
     Redirect
 } from 'react-router-dom';
 
-function PrivateRoute({ component: Component, ...rest }) {
+function PrivateRoute({ component: Component, ...rest }) { 
     return (
         <Route
             {...rest}
             render={props =>
-                localStorage.getItem('username') ? (
-                    <Component {...props} />
-                ) : (
+                localStorage.getItem("Email")
+                    ? (<Component {...props} />)
+                    : (alert("You must log in"),
                         <Redirect to={{
-                            pathname: '/signin',
-                            state: {from: props.location} }} />
-                )
+                            pathname: "/usersignin",
+                            state: { from: props.location }
+                        }} />
+                    )
             }
         />
-    )
+    );
 }
 
 export default PrivateRoute;
