@@ -83,7 +83,7 @@ class CourseDetail extends Component {
         console.log(this.state.courseInfo);
             const { createdBy } = this.state;
             const { id, title, materialsNeeded, estimatedTime, description, User } = this.state.courseInfo.course;
-            return (
+        return (
                 <div>
                     <div className='actions--bar'>
                         <div className='bounds'>
@@ -107,17 +107,25 @@ class CourseDetail extends Component {
                         <div className='grid-66'>
                             <div className='course--header'>
                                 <h4 className='course-label'>Course</h4>
+                              
+                    </div>
+
+                    {/* title of course */}
+                    <div className='bounds course--detail'>
+                        <div className='grid-66'>
+                            <div className='course--header'>
+                                <h4 className='course-label'>Course</h4>
                                 <h3 className='course--title'>{title}</h3>
                                 <p>By {User.firstName} {User.lastName}</p>
-                            </div>
+                                </div>
+                                {/* course description*/}
+                                <div className='course--description'>
+                                {/* use <ReactMarkdown> to render the course description property */}
+                                <ReactMarkdown source={description} />
+                                </div>
                         </div>
                     </div>
 
-                        {/* course description*/}
-                        <div className='course--description'>
-                        {/* use <ReactMarkdown> to render the course description property */}                           
-                                <ReactMarkdown source={description} />                   
-                        </div>
 
                     {/* side bar */}
                     <div className='grid-25 grid-right'>
@@ -141,7 +149,9 @@ class CourseDetail extends Component {
                             </ul>
                         </div>
                     </div>
+                    </div>
                 </div>
+            </div>
             )};
 }
 
