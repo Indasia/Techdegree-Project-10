@@ -9,7 +9,7 @@ const bcryptjs = require('bcryptjs');
 router.get('/', authentication, function (req, res) {
     res.json({
         id: req.currentUser.id,
-        firstName: req.currentUser.emailAddress,
+        firstName: req.currentUser.firstName,
         lastName: req.currentUser.lastName,
         emailAddress: req.currentUser.emailAddress
     });
