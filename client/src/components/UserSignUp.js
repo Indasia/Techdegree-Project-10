@@ -23,23 +23,8 @@ class UserSignUp extends Component {
 
         const { firstName, lastName, emailAddress, password, confirmPassword } = this.state;
 
-        // if first name is blank, show error
-        if (firstName === '') {
-            this.setState({
-                errorMessage: 'Enter your first name'
-            })
-          // if last name is blank, show error
-        } else if (lastName === '') {
-            this.setState({
-                errorMessage: 'Enter your last name'
-            })
-        // if email is blank, show error
-        } else if (emailAddress === '') {
-            this.setState({
-                errorMessage: 'An email address is required'
-            })
-        // if password is blank, show error
-        } else if (password === '') {
+        // password is required
+        if(password === '') {
             this.setState({
                 errorMessage: 'A password is required'
             })
@@ -60,9 +45,16 @@ class UserSignUp extends Component {
                         this.props.signIn({ emailAddress, password });
                     }
                 }).catch(error => {
-                    console.log('Oops!', error);
-                    console.log(error.response.data);
-                });
+                    if (error.response.status === 400) {
+                        this.setState({
+                            errorMessage: error.response.data.message
+                        })
+                    } else if (error.response.status === 401) {
+                        this.setState({
+                            errorMessage: error.response.data.message
+                        })
+                    }
+                })
         }
     }
 

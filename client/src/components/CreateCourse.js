@@ -41,7 +41,7 @@ class CreateCourse extends Component {
                         this.setState({
                             errorMessage: error.response.data.message
                         })
-                    } else if (error.response.status === 400) {
+                    } else if (error.response.status === 401) {
                         this.setState({
                             errorMessage: error.response.data.message   
                         })
