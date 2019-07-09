@@ -53,7 +53,7 @@ class App extends Component {
 
         } else {
           localStorage.clear();
-          window.location.assign('/usersignup')
+          window.location.assign('/signup')
         }
     })
   }
@@ -76,10 +76,10 @@ class App extends Component {
               <Route exact path='/courses' render={() => <Courses />} />
               <PrivateRoute exact path='/courses/create' component={CreateCourse} />
               <Route exact path='/courses/:id' component={CourseDetail} />
-              <Route exact path='/UserSignIn' render={() => <UserSignIn signIn={this.handleSignIn} />} />
+              <Route exact path='/signin' render={() => <UserSignIn signIn={this.handleSignIn} />} />
               <PrivateRoute exact path='/courses/:id/update' component={UpdateCourse} />
-              <Route exact path='/UserSignUp' render={() => <UserSignUp signIn={this.handleSignIn} />} />
-              <Route exact path='/UserSignOut' component={UserSignOut} />
+              <Route exact path='/signup' render={() => <UserSignUp signIn={this.handleSignIn} />} />
+              <Route exact path='/signout' component={UserSignOut} />
             </Switch>
           </div>
         </BrowserRouter>

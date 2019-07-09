@@ -8,7 +8,7 @@ const Header = () => {
                 <h1 className='header--logo'>Courses</h1>
                 <nav>
                     <span>Welcome {localStorage.getItem('FirstName')} {localStorage.getItem('LastName')}</span>
-                    <Link className='signout' to='/usersignout'> Sign Out </Link>
+                    <Link className='signout' to='/signout'> Sign Out </Link>
                 </nav>
             </div>
         </div>
@@ -19,8 +19,8 @@ const Header = () => {
                         <NavLink to='/courses'>Courses</NavLink>
                     </h1>
                     <nav>
-                        <Link className='signup' to={'/UserSignUp'}> Sign Up </Link>
-                        <Link className='signin' to={'/UserSignIn'}> Sign In </Link>
+                        <Link className='signup' to={'/signup'}> Sign Up </Link>
+                        <Link className='signin' to={'/signin'}> Sign In </Link>
                     </nav>
                 </div>
             </div>

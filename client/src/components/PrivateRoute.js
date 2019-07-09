@@ -13,7 +13,7 @@ function PrivateRoute({ component: Component, ...rest }) {
                     ? (<Component {...props} />)
                     : (alert("You must log in"),
                         <Redirect to={{
-                            pathname: "/usersignin",
+                            pathname: "/signin",
                             state: { from: props.location }
                         }} />
                     )
