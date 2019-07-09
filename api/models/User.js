@@ -8,10 +8,22 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         firstName: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: "First name required",
+                }
+            }
         },
         lastName: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: "Last name required",
+                }
+            }
         },
         emailAddress: {
             type: DataTypes.STRING
