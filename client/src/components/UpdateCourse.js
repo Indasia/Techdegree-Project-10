@@ -47,7 +47,9 @@ class UpdateCourse extends Component {
     }
 
     handleSubmit = e => {
+        // prevent default
         e.preventDefault();
+            // request information to update
             axios({
                 method: 'put',
                 url: 'http://localhost:5000/api/courses/' + this.props.match.params.id,
@@ -64,8 +66,10 @@ class UpdateCourse extends Component {
                     materialsNeeded: this.state.materialsNeeded
 
                 }
+            // send user to the right course
             }).then(res => {
                 this.props.history.push('/courses/' + this.props.match.params.id);
+            // validation errors from the API
             }).catch(error => {
                 console.log('All credentials are required');
                 if (error.response.status === 400) {
@@ -81,6 +85,7 @@ class UpdateCourse extends Component {
     }
 
     render() {
+        {/* show who owns the course */}
         const courseOwner = `${this.state.firstName} ${this.state.lastName}`;
         const { title, description, estimatedTime, materialsNeeded, errorMessage } = this.state;
         return (
@@ -97,7 +102,6 @@ class UpdateCourse extends Component {
                             </div>
                         </div>
                     ) : ''}
-                    {/* should this be create course?*/}
                     <form onSubmit={e => this.handleSubmit(e)}>
                         <div className='grid-66'>
                             <div className='course--header'>

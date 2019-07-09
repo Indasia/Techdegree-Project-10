@@ -71,7 +71,8 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Header />
-            <Switch>
+           <Switch>
+              {/* routes */}
               <Redirect exact from='/' to='/courses' />
               <Route exact path='/courses' render={() => <Courses />} />
               <PrivateRoute exact path='/courses/create' component={CreateCourse} />

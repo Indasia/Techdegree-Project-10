@@ -1,3 +1,6 @@
+// stateless component
+// will clear information and redirect to main courses page when user signs out
+
 const UserSignOut = () => {
     localStorage.clear();
     window.location.href = '/';
@@ -5,18 +8,3 @@ const UserSignOut = () => {
 }
 
 export default UserSignOut;
-
-/*
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-
-class UserSignOut extends Component {
-
-    // User is redirected to "/Courses" after logging out
-    render() {
-        return (
-            <Redirect to="/Courses" />
-        )
-    }
-}
-*/

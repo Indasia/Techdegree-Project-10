@@ -4,6 +4,7 @@ import axios from 'axios';
 
 class UserSignUp extends Component {
 
+    // set local state (empty strings)
     state = {
         firstName: '',
         lastName: '',
@@ -13,11 +14,14 @@ class UserSignUp extends Component {
         errorMessage: ''
     }
 
+    // handle changes to user input
     handleInputChange = e => {
         e.preventDefault();
+        // reference to current input field
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    // handle sign up
     handleSignUp = (e) => {
         e.preventDefault();
 
@@ -44,6 +48,7 @@ class UserSignUp extends Component {
                         })
                         this.props.signIn({ emailAddress, password });
                     }
+                // validation errors from API
                 }).catch(error => {
                     if (error.response.status === 400) {
                         this.setState({

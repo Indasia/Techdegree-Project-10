@@ -4,6 +4,7 @@ import axios from 'axios';
 
 class CreateCourse extends Component {
 
+    // empty local state
     state = {
         id: '',
         title: '',
@@ -19,7 +20,9 @@ class CreateCourse extends Component {
 
     // handle created course
     handleCreateCourse = e => {
+        // prevent default
         e.preventDefault();
+            // send information
             axios({
                 method: 'post',
                 url: 'http://localhost:5000/api/courses',
@@ -35,7 +38,9 @@ class CreateCourse extends Component {
                     userId: localStorage.getItem("UserId"),
                 }
             }).then(() => {
-                    this.props.history.push('/');
+                // redirect user when course is created
+                this.props.history.push('/');
+                // validation errors from API
                 }).catch(error => {
                     if (error.response.status === 400) {
                         this.setState({
