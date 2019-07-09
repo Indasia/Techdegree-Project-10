@@ -10,9 +10,11 @@ class UpdateCourse extends Component {
         description: '',
         estimatedTime: '',
         materialsNeeded: '',
-        userid: '',
+                                                                                                  userId: '',
         createdBy: '',
-        errorMessage: ''
+        errorMessage: '',
+        firstName: '',
+        lastName: ''
     }
 
     // when update course component mounts, get course info
@@ -28,17 +30,19 @@ class UpdateCourse extends Component {
             .then(res => {
 
                 // course info
-                const courseInfo = res.data;
+                const courseInfo = res.data.course;
 
                 // set state to the current course
                 this.setState({
-                    userid: courseInfo.userid,
+                    userid: courseInfo.userId,
                     id: courseInfo.id,
                     title: courseInfo.title,
                     description: courseInfo.description,
                     estimatedTime: courseInfo.estimatedTime,
                     materialsNeeded: courseInfo.materialsNeeded,
-                    errorMessage: ''
+                    errorMessage: '',
+                    firstName: courseInfo.course.firstName,
+                    lastName: courseInfo.lastName
                 })
             }) // catch error?
     };
@@ -82,6 +86,7 @@ class UpdateCourse extends Component {
 
 
     render() {
+        const courseOwner = `${this.state.firstName} ${this.state.lastName}`;
         const { title, description, estimatedTime, materialsNeeded, errorMessage } = this.state;
         return (
             <div className='bounds course--detail'>
@@ -89,7 +94,7 @@ class UpdateCourse extends Component {
                 <div>
                     {errorMessage ? (
                         <div>
-                            <h2 className='validation--errors--label'>Validation errors</h2>
+                            <h2 className='validation--errors--label'>Uh oh!</h2>
                             <div className='validation-errors'>
                                 <ul>
                                     <li>{errorMessage}</li>
@@ -109,11 +114,11 @@ class UpdateCourse extends Component {
                                         type='text'
                                         className='input-title course--title--input'
                                         placeholder='Course title'
-                                        value={this.state.title}
+                                        value={title}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
-                                <p>By {this.state.username}}</p>
+                                <p>By {courseOwner}</p>
                             </div>
                             <div className='course--description'>
                                 <div>
@@ -122,7 +127,7 @@ class UpdateCourse extends Component {
                                         name='description'
                                         className=''
                                         placeholder='Course description'
-                                        value={this.state.description}
+                                        value={description}
                                         onChange={this.handleInputChange}>
                                     </textarea>
                                 </div>
@@ -140,7 +145,7 @@ class UpdateCourse extends Component {
                                                 type='text'
                                                 className='course--time--input'
                                                 placeholder='Hours'
-                                                value={this.state.estimatedTime}
+                                                value={estimatedTime}
                                                 onChange={this.handleInputChange}
                                             />
                                         </div>
@@ -153,7 +158,7 @@ class UpdateCourse extends Component {
                                                 name='materialsNeeded'
                                                 className=''
                                                 placeholder='Materials needed'
-                                                value={this.state.materialsNeeded}
+                                                value={materialsNeeded}
                                                 onChange={this.handleInputChange} >
                                             </textarea>
                                         </div>
@@ -166,7 +171,7 @@ class UpdateCourse extends Component {
                             {/* renders an 'Update Course' button that when clicked sends a PUT request to the REST API's /api/courses/:id route.  */}
                             <button className='button' type='submit'> Update Course </button>
                             {/* renders a 'Cancel' button that returns the user to the 'Course Detail' screen. */}
-                            <Link className='button button-secondary' to='/courses'> Cancel </Link>
+                            <Link className='button button-secondary' to='/courses/:id/update'> Cancel </Link>
                         </div>
                     </form>
                 </div>
