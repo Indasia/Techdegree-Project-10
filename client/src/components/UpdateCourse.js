@@ -17,11 +17,6 @@ class UpdateCourse extends Component {
         lastName: ''
     }
 
-    // when update course component mounts, get course info
-    componentDidMount() {
-        // this.handleCourses();
-    }
-
     // handle changes to user input
     handleCourses = e => {
         // request info
@@ -44,24 +39,15 @@ class UpdateCourse extends Component {
                     firstName: courseInfo.course.firstName,
                     lastName: courseInfo.lastName
                 })
-            }) // catch error?
+            })
     };
 
     handleInputChange = e => {
-        // prevent default needed?
-
         this.setState({ [e.target.name]: e.target.value });
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        const { title, description } = this.state;
-
-        if (title === '') {
-            this.setState({errorMessage: 'You must enter a title'});
-        } else if (description === '') {
-            this.setState({errorMessage: 'You must enter a description'})
-        } else {
             axios({
                 method: 'put',
                 url: 'http://localhost:5000/api/courses/' + this.props.match.params.id,
@@ -80,8 +66,18 @@ class UpdateCourse extends Component {
                 }
             }).then(res => {
                 this.props.history.push('/courses/' + this.props.match.params.id);
+            }).catch(error => {
+                console.log('All credentials are required');
+                if (error.response.status === 400) {
+                    this.setState({
+                        errorMessage: error.response.data.message
+                    })
+                } else if (error.response.status === 401) {
+                    this.setState({
+                        errorMessage: error.response.data.message
+                    })
+                }
             })
-        }
     }
 
 
@@ -171,7 +167,7 @@ class UpdateCourse extends Component {
                             {/* renders an 'Update Course' button that when clicked sends a PUT request to the REST API's /api/courses/:id route.  */}
                             <button className='button' type='submit'> Update Course </button>
                             {/* renders a 'Cancel' button that returns the user to the 'Course Detail' screen. */}
-                            <Link className='button button-secondary' to='/courses/:id/update'> Cancel </Link>
+                            <Link className='button button-secondary' to='/courses' > Cancel </Link>
                         </div>
                     </form>
                 </div>
