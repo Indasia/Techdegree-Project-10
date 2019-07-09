@@ -80,7 +80,6 @@ class UpdateCourse extends Component {
             })
     }
 
-
     render() {
         const courseOwner = `${this.state.firstName} ${this.state.lastName}`;
         const { title, description, estimatedTime, materialsNeeded, errorMessage } = this.state;
@@ -167,7 +166,7 @@ class UpdateCourse extends Component {
                             {/* renders an 'Update Course' button that when clicked sends a PUT request to the REST API's /api/courses/:id route.  */}
                             <button className='button' type='submit'> Update Course </button>
                             {/* renders a 'Cancel' button that returns the user to the 'Course Detail' screen. */}
-                            <Link className='button button-secondary' to='/courses' > Cancel </Link>
+                            <Link className='button button-secondary' to={'/courses/' + this.props.match.params.id}> Cancel </Link>
                         </div>
                     </form>
                 </div>
