@@ -20,17 +20,6 @@ class CreateCourse extends Component {
     // handle created course
     handleCreateCourse = e => {
         e.preventDefault();
-
-        const { title, description } = this.state;
-        if (title === '') {
-            this.setState({
-                errorMessage: 'Please enter a title'
-            })
-        } else if (description === '') {
-            this.setState({
-                errorMessage: 'A description must be entered'
-            })
-        } else {
             axios({
                 method: 'post',
                 url: 'http://localhost:5000/api/courses',
@@ -45,15 +34,19 @@ class CreateCourse extends Component {
                     materialsNeeded: this.state.materialsNeeded,
                     userId: localStorage.getItem("UserId"),
                 }
-            }).then(alert("New course successfully created"))
-                .then(() => {
+            }).then(() => {
                     this.props.history.push('/');
                 }).catch(error => {
-                    console.log('Oops!', error);
-                    console.log(error.response.data);
+                    if (error.response.status === 400) {
+                        this.setState({
+                            errorMessage: error.response.data.message
+                        })
+                    } else if (error.response.status === 400) {
+                        this.setState({
+                            errorMessage: error.response.data.message   
+                        })
+                    }
                 })
-                
-        }
         
     }
     render() {
